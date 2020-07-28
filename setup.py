@@ -12,7 +12,7 @@ setup(
     description='A tool for mocking mpi4py for testing',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/XXX/mock_mpi',
+    url='https://github.com/rmjarvis/MockMPI',
     author='Mike Jarvis',
     author_email='michael@jarvis.net',
     classifiers=[
