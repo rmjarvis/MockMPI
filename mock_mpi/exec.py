@@ -39,7 +39,7 @@ class Process(mp.Process):
         return self._exception
 
 
-def mock_mpiexec(nproc, target):
+def mock_mpiexec(nproc, target, args=None, kwargs=None):
     """Run a function, given as target, as though it were an MPI session using mpiexec -n nproc
     but using multiprocessing instead of mpi.
     """
@@ -62,7 +62,9 @@ def mock_mpiexec(nproc, target):
     ]
 
     # Make processes
-    procs = [Process(target=target, args=(comm,)) for comm in comms]
+    args = args or []
+    kwargs = kwargs or {}
+    procs = [Process(target=target, args=[comm] + args, kwargs=kwargs) for comm in comms]
 
     for p in procs:
         p.start()
