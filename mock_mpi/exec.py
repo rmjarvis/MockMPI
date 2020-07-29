@@ -62,9 +62,9 @@ def mock_mpiexec(nproc, target, args=None, kwargs=None):
     ]
 
     # Make processes
-    args = args or []
+    args = args or ()
     kwargs = kwargs or {}
-    procs = [Process(target=target, args=[comm] + args, kwargs=kwargs) for comm in comms]
+    procs = [Process(target=target, args=(comm,) + tuple(args), kwargs=kwargs) for comm in comms]
 
     for p in procs:
         p.start()
