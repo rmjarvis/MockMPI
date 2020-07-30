@@ -62,7 +62,7 @@ mimics:
 
 ```
 
-This works if the argments can be pickled (true for most basic python and numpy types).
+This works if the arguments can be pickled (true for most basic python and numpy types).
 
 Caveats
 -------
