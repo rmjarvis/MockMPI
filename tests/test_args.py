@@ -1,4 +1,4 @@
-from mock_mpi import mock_mpiexec
+from mockmpi import mock_mpiexec
 
 
 def f(comm, txt, index=0, index2=0):

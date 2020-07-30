@@ -1,7 +1,7 @@
 # Copyright (c) Mike Jarvis and other collaborators
 # See https://github.com/rmjarvis/MockMPI/LICENSE for license information.
 
-from mock_mpi import mock_mpiexec
+from mockmpi import mock_mpiexec
 import numpy as np
 
 def run_mpi_session(comm):
