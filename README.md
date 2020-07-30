@@ -46,11 +46,11 @@ To test the code without MPI, import mock_mpiexec from this package and run:
 Extra Arguments
 ---------------
 
-You can also supply `args=[...]` and `kwargs={...}` to `mock_mpiexec` and they will be passed
-to `function_to_test`:
+You can also supply additional named or positional arguments to `mock_mpiexec` and they will be
+passed to `function_to_test`:
 
 ```
-    mock_mpiexec(nproc, function_to_test, args=[1,2,3], kwargs={'a':'b'})
+    mock_mpiexec(nproc, function_to_test, 1, 2, 3, a='b')
 ```
 
 mimics:
@@ -62,7 +62,7 @@ mimics:
 
 ```
 
-This works if `args` and `kwargs` can be pickled (true for most basic python and numpy types).
+This works if the argments can be pickled (true for most basic python and numpy types).
 
 Caveats
 -------
