@@ -30,7 +30,7 @@ setup(
     author='Mike Jarvis and collaborators',
     author_email='michael@jarvis.net',
     classifiers=[
-        'Development Status :: 3 - Beta',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python :: 3',
