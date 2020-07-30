@@ -14,7 +14,7 @@ Installation
 The code is pure python; you can install it with:
 
 ```
-    pip install mock_mpi
+    pip install mockmpi
 ```
 
 Usage
