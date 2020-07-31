@@ -2,3 +2,4 @@ __pycache__
 build/
 dist/
 MockMPI.egg-info/
+.pytest_cache
