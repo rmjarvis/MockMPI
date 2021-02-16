@@ -130,6 +130,10 @@ class MockComm(object):
         self.Reduce(sendbuf, recvbuf, op)
         self.Bcast(recvbuf)
 
+    def allgather(self, sendobj):
+        obj = self.gather(sendobj)
+        return self.bcast(obj)
+
     # Instance methods not implemented
     def Abort(self, *args, **kwargs):
         raise NotImplementedError("The method 'Abort' is not implemented in mockmpi")
@@ -490,11 +494,6 @@ class MockComm(object):
     def Ssend_init(self, *args, **kwargs):
         raise NotImplementedError(
             "The method 'Ssend_init' is not implemented in mockmpi"
-        )
-
-    def allgather(self, *args, **kwargs):
-        raise NotImplementedError(
-            "The method 'allgather' is not implemented in mockmpi"
         )
 
     def barrier(self, *args, **kwargs):

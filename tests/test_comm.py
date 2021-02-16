@@ -116,6 +116,15 @@ def run_mpi_session(comm):
     print(rank, "After AllReduce: y = ", y, flush=True)
     assert np.allclose(y, size * (size - 1) // 2)
 
+    # test allgather
+    my_item = rank * 7
+    all_items = comm.allgather(my_item)
+    print(rank, "after allgather, all_items = ", all_items)
+    assert len(all_items) == size
+    assert all_items[rank] == my_item
+    for i in range(size):
+        assert all_items[i] == i * 7
+
 
 def test_mpi_session():
     mock_mpiexec(2, run_mpi_session)
