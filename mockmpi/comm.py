@@ -113,7 +113,7 @@ class MockComm(object):
         return d
 
     def Reduce(self, sendbuf, recvbuf, op=None, root=0):
-        if (sendbuf is IN_PLACE) or (isinstance(sendbuf, int) and sendbuf == IN_PLACE):
+        if isinstance(sendbuf, int) and (sendbuf == IN_PLACE):
             sendbuf = recvbuf.copy()
 
         if not isinstance(sendbuf, np.ndarray):
