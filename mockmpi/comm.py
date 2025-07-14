@@ -3,9 +3,11 @@
 
 import numpy as np
 
-# This constant seems to have the same value in MPICH and OpenMPI
-# so we reproduce it here since it can be quite important.
-IN_PLACE = 1
+# This constant used to be 1 in both MPICH and OpenMPI,
+# but starting with mpi4py version 4, they switched it to -1.
+# Use -1 here, but when we check for it allow 1 as well.
+IN_PLACE = -1
+ALLOWED_IN_PLACE = [1, -1]
 
 
 class MockComm(object):
@@ -113,7 +115,7 @@ class MockComm(object):
         return d
 
     def Reduce(self, sendbuf, recvbuf, op=None, root=0):
-        if isinstance(sendbuf, int) and (sendbuf == IN_PLACE):
+        if isinstance(sendbuf, int) and (sendbuf in ALLOWED_IN_PLACE):
             sendbuf = recvbuf.copy()
 
         if not isinstance(sendbuf, np.ndarray):
