@@ -6,8 +6,12 @@ import numpy as np
 # This constant used to be 1 in both MPICH and OpenMPI,
 # but starting with mpi4py version 4, they switched it to -1.
 # Use -1 here, but when we check for it allow 1 as well.
-IN_PLACE = -1
-ALLOWED_IN_PLACE = [1, -1]
+# And if we happen to have mpi4py installed, include whatever it actually has as well.
+try:
+    from mpi4py.MPI import IN_PLACE
+except ImportError:
+    IN_PLACE = -1
+ALLOWED_IN_PLACE = [IN_PLACE, 1, -1]
 
 
 class MockComm(object):
