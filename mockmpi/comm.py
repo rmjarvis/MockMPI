@@ -5,12 +5,17 @@ import numpy as np
 
 # This constant used to be 1 in both MPICH and OpenMPI,
 # but starting with mpi4py version 4, they switched it to -1.
+# Even worse, starting with 4.1, it's not a subtype of int as it had been until then.
+# But it does cast to an int if requested.
 # Use -1 here, but when we check for it allow 1 as well.
-# And if we happen to have mpi4py installed, include whatever it actually has as well.
+# And if we happen to have mpi4py installed, include whatever it actually has as well
+# both for the value and the type.
 try:
     from mpi4py.MPI import IN_PLACE
+    ALLOWED_IN_PLACE_TYPES = (int, type(IN_PLACE))
 except ImportError:
     IN_PLACE = -1
+    ALLOWED_IN_PLACE_TYPES = (int,)
 ALLOWED_IN_PLACE = [IN_PLACE, 1, -1]
 
 
@@ -119,7 +124,7 @@ class MockComm(object):
         return d
 
     def Reduce(self, sendbuf, recvbuf, op=None, root=0):
-        if isinstance(sendbuf, int) and (sendbuf in ALLOWED_IN_PLACE):
+        if isinstance(sendbuf, ALLOWED_IN_PLACE_TYPES) and (sendbuf in ALLOWED_IN_PLACE):
             sendbuf = recvbuf.copy()
 
         if not isinstance(sendbuf, np.ndarray):
