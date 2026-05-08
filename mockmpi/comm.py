@@ -28,7 +28,7 @@ class MockComm(object):
         self.rank = rank
         self.size = size
         self.pipes = pipes
-        self.barrier = barrier
+        self._barrier = barrier
 
     def __bool__(self):
         return self.size > 0
@@ -65,7 +65,10 @@ class MockComm(object):
         buffer[:] = msg
 
     def Barrier(self):
-        self.barrier.wait()
+        self._barrier.wait()
+    
+    def barrier(self):
+        self.Barrier()
 
     def bcast(self, msg, root=0):
         if root == self.rank:
